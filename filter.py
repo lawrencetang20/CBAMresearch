@@ -10,6 +10,7 @@ data = df[selected_columns].copy()
 other_countries = {'USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS'}
 EU_countries = {'AUT', 'BEL', 'BGR', 'HRV', 'CYP', 'CZE', 'DNK', 'EST', 'FIN', 'FRA', 'DEU', 'GRC', 'HUN', 'IRL', 'ITA', 'LVA', 'LTU', 'LUX', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'ESP', 'SWE'}
 
+# add more sectors here
 crude = {'270900'}
 gas = {'2711'}
 refined = {'271000'}
@@ -20,6 +21,7 @@ fertilizer_exceptions = {'310560'}
 aluminum = {'7601', '7603', '7604', '7605', '7606', '7607', '7608', '760900', '7610', '761100', '7612', '761300', '7614', '7616'}
 chemicals = {'280410'}
 
+# add elif statement here if you add more sectors
 def map_to_sector(hs_product_code):
   if hs_product_code in chemicals:
     return 'chemicals'
@@ -63,6 +65,7 @@ grouped_data = data.groupby(['sector', 'destination', 'origin']).sum().reset_ind
 grouped_data_reset = grouped_data.reset_index()
 sorted_data = grouped_data.sort_values(by=['destination', 'sector'])
 
+# fills in categories where we have 0 so we have a data point for each combination
 sectors = sorted_data['sector'].unique()
 destinations = ['USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS', 'EU', 'ROW']
 all_combinations = [(sector, destination, origin) for sector in sectors for destination in destinations for origin in destinations]
@@ -79,7 +82,7 @@ no_other = sorted_merged_data[sorted_merged_data['sector'] != 'other']
 no_other.to_csv('trade_data.csv', index=False)
 print('trade data saved to trade_data.csv')
 
-
+# OUTLINE OF STEPS
 # add another column saying the sector
 # change code to ROW if not in countries
 # groupby location_code, partner_code, sector, sum(export_value)
