@@ -1,4 +1,4 @@
-# Carbon Border Adjustment Mechanism Research for MIT Sloan
+# Carbon Border Adjustment Mechanism Research (CBAM) for MIT Sloan
 
 ## Overview
 - The **data** folder contains where you should have your data downloaded. See below for instructions.
