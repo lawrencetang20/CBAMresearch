@@ -5,7 +5,7 @@
 - The **CBAM Tipping Point** Excel sheet analyzes the payoff to the US based on the implementation of carbon pricing in other countries. The trade flow data used in this Excel sheet is sourced from Atlas of Economic Complexity and processed in Python (in the Trade tab). The model allows you to tune parameters (e.g. CP value, trade loss rate, abatement rate) and calculates the resulting payoff to the U.S. in the scenarios with and without a domestic CP.
 - **Data_dictionary.pdf** tells you about the data you downloaded from the Atlas of Economic Complexity.
 - **Filter.py** contains the Python script used to filter and manipulate the raw data from the .csv file into data that can be directly used inside the CBAM Tipping Point sheet in the Trade tab. This data gets saved in the trade_data.csv file.
-- **Hs_code_classification.pdf** tells us how the EU categorizes the hs_codes and the sectors. Look at the end of the pdf to see the breakdowns of the categories. This is how you filter hs_code to sector/products.
+- **Hs_code_classification.pdf** tells us how the EU categorizes the hs_codes and the sectors. Look at the end of the pdf to see the breakdowns of the categories. This is how you filter hs_code to sector/products. This was downloaded from [European Union Law](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R0956) in English.
 - **Trade_data.csv** is the data that gets put inside the Trade tab and is the result of running filter.py. It is currently the trade data for the year 2021.
 
 ## Installation
@@ -28,3 +28,11 @@ This repository assumes that you have already downloaded the data from the Atlas
 All data manipulation is done in the filter.py folder. All countries in the [European Union](https://en.wikipedia.org/wiki/European_Union) are combined into a bigger "country" we call "EU," and all countries that aren't USA, CAN, MEX, BRA, IND, CHN, RUS, or EU get put into "ROW" or Rest of the World. In the .csv data file, all countries are in [ISO 3166-1 alpha-3 format](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
 Currently, the added sectors are chemicals, fertilizer, aluminum, iron/steel, crude, gas, and refined. Use the map_to_sector() function to add more sectors if needed. Be sure you have declared your variables before adding a new sector.
+
+The steps in filter.py is as follows:
+1) We first select the columns we want from the downloaded .csv file.
+2) We add a new column sector that maps the hs_product_code to the correct sector. This is done through [data_dictionary.pdf](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R0956).
+3) We add new columns destination and origin from the previous location and partner code columns with our desired names for countries, combining the EU and ROW countries as explained above.
+4) We sum over all export values with the same destination, origin, and sector.
+5) We then fill in 0 for all combinations of country to country in which no export value was reported.
+6) The data is saved to trade_data.csv file.
