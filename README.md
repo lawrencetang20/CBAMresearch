@@ -29,10 +29,10 @@ All data manipulation is done in the filter.py folder. All countries in the [Eur
 
 Currently, the added sectors are chemicals, fertilizer, aluminum, iron/steel, crude, gas, and refined. Use the map_to_sector() function to add more sectors if needed. Be sure you have declared your variables before adding a new sector.
 
-The steps in filter.py is as follows:
+The steps in filter.py are as follows:
 1) We first select the columns we want from the downloaded .csv file.
 2) We add a new column sector that maps the hs_product_code to the correct sector. This is done through [data_dictionary.pdf](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32023R0956).
 3) We add new columns destination and origin from the previous location and partner code columns with our desired names for countries, combining the EU and ROW countries as explained above.
 4) We sum over all export values with the same destination, origin, and sector.
 5) We then fill in 0 for all combinations of country to country in which no export value was reported.
-6) The data is saved to trade_data.csv file.
+6) The data is saved to the trade_data.csv file.
