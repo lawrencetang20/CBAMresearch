@@ -82,6 +82,8 @@ no_other = sorted_merged_data[sorted_merged_data['sector'] != 'other']
 no_other.to_csv('trade_data.csv', index=False)
 print('trade data saved to trade_data.csv')
 
+# MAP ISO CODES TO REGULAR STRINGS
+
 # OUTLINE OF STEPS
 # add another column saying the sector
 # change code to ROW if not in countries
