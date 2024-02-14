@@ -2,6 +2,7 @@
 
 ## Overview
 - The **data** folder contains where you should have your data downloaded. See below for instructions.
+- The **other** folder contains other bills, articles, etc. used and researched on.
 - The **CBAM Tipping Point** Excel sheet analyzes the payoff to the US based on the implementation of carbon pricing in other countries. The trade flow data used in this Excel sheet is sourced from Atlas of Economic Complexity and processed in Python (in the Trade tab). The model allows you to tune parameters (e.g. CP value, trade loss rate, abatement rate) and calculates the resulting payoff to the U.S. in the scenarios with and without a domestic CP.
 - **Data_dictionary.pdf** tells you about the data you downloaded from the Atlas of Economic Complexity.
 - **Filter.py** contains the Python script used to filter and manipulate the raw data from the .csv file into data that can be directly used inside the CBAM Tipping Point sheet in the Trade tab. This data gets saved in the trade_data.csv file.
