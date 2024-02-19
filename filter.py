@@ -7,8 +7,8 @@ df = pd.read_csv(csvfile, dtype={'hs_product_code': str}, low_memory=False)
 selected_columns = ['location_code', 'partner_code', 'hs_product_code', 'export_value']
 data = df[selected_columns].copy()
 
-other_countries = {'USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS', 'GBR'} # to add another country, add here and BELOW
-EU_countries = {'AUT', 'BEL', 'BGR', 'HRV', 'CYP', 'CZE', 'DNK', 'EST', 'FIN', 'FRA', 'DEU', 'GRC', 'HUN', 'IRL', 'ITA', 'LVA', 'LTU', 'LUX', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'ESP', 'SWE'}
+other_countries = {'USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS'} # to add another country, add here and BELOW
+EU_countries = {'AUT', 'BEL', 'BGR', 'HRV', 'CYP', 'CZE', 'DNK', 'EST', 'FIN', 'FRA', 'DEU', 'GRC', 'HUN', 'IRL', 'ITA', 'LVA', 'LTU', 'LUX', 'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'ESP', 'SWE', 'GBR'}
 
 # add more sectors here
 crude = {'270900'}
@@ -45,6 +45,8 @@ def country_assignment(country):
     return country
   elif country in EU_countries:
     return 'EU'
+  elif country == 'AUS':
+    return 'CAN'
   else:
     return 'ROW'
 
@@ -67,7 +69,7 @@ sorted_data = grouped_data.sort_values(by=['destination', 'sector'])
 
 # fills in categories where we have 0 so we have a data point for each combination
 sectors = sorted_data['sector'].unique()
-destinations = ['USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS', 'EU', 'ROW', 'GBR'] # ADD HERE FOR NEW COUNTRY TOO
+destinations = ['USA', 'CAN', 'MEX', 'BRA', 'IND', 'CHN', 'RUS', 'EU', 'ROW'] # ADD HERE FOR NEW COUNTRY TOO
 all_combinations = [(sector, destination, origin) for sector in sectors for destination in destinations for origin in destinations]
 
 template_data = pd.DataFrame(all_combinations, columns=['sector', 'destination', 'origin'])
