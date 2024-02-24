@@ -37,3 +37,7 @@ The steps in filter.py are as follows:
 4) We sum over all export values with the same destination, origin, and sector.
 5) We then fill in 0 for all combinations of country to country in which no export value was reported.
 6) The data is saved to the trade_data.csv file.
+
+## Other
+
+The UK is added to the EU countries, and Australia is counted in the Canada section.
